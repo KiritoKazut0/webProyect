@@ -1,0 +1,9 @@
+div.container-Home{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top:50px ;
+    align-items: center;
+}
