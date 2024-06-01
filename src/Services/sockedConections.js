@@ -1,45 +1,48 @@
-// services/websocketService.js
-let socket;
+class WebSocketService {
+  constructor() {
+    this.ws = null;
+    this.onMessageCallback = null;
+  }
 
-export const connectWebSocket = (url) => {
-  socket = new WebSocket(url);
+  connect(url) {
+    this.ws = new WebSocket(url);
+    this.ws.onopen = this.onOpen;
+    this.ws.onmessage = this.onMessage;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
 
-  socket.onopen = () => {
-    console.log('WebSocket connected');
+  onOpen = () => {
+    console.log('Conectado al servidor WebSocket');
   };
 
-  socket.onclose = () => {
-    console.log('WebSocket disconnected');
+  onMessage = (event) => {
+    const data = JSON.parse(event.data);
+    if (this.onMessageCallback) {
+      this.onMessageCallback(data);
+    }
   };
 
-  socket.onerror = (error) => {
+  onError = (error) => {
     console.error('WebSocket error:', error);
   };
-};
 
-export const sendMessage = (message) => {
-  if (socket && socket.readyState === WebSocket.OPEN) {
-    socket.send(JSON.stringify(message));
-  } else {
-    console.error('WebSocket is not open');
-  }
-};
+  onClose = () => {
+    console.log('Desconectado del servidor WebSocket');
+  };
 
-export const onMessage = (callback) => {
-  if (socket) {
-    socket.onmessage = (event) => {
-        
-      const data = JSON.parse(event.data);
-      console.log(data);
-      callback(data);
-    };
-  } else {
-    console.error('WebSocket is not initialized');
-  }
-};
+  sendMessage = (message) => {
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+      this.ws.send(JSON.stringify(message));
+    } else {
+      console.error('WebSocket no está conectado');
+    }
+  };
 
-export const closeWebSocket = () => {
-  if (socket) {
-    socket.close();
-  }
-};
+  setOnMessageCallback = (callback) => {
+    this.onMessageCallback = callback;
+  };
+}
+
+const ConexionSocked = new WebSocketService();
+export default ConexionSocked;

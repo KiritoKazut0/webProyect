@@ -1,9 +1,36 @@
-div.container-Home{
-    width: 100%;
+div.container-Post{
+    width: 35%;
     height: auto;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    padding-top:50px ;
     align-items: center;
+   gap: 25px;
+    align-items: center;
+    background-color: black;
+    
+}
+
+div.Container-Home{
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    padding: 20px 0;
+    gap: 10px;
+    background-color: black;
+}
+
+div.histories{
+    margin-top: 12px;
+    display: flex;
+    gap: 28px;
+    
+}
+
+div.nav{
+    width: 15%;
+    height: 100vh;
+   
 }
