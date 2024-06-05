@@ -21,7 +21,7 @@ export default function Histories({src}) {
         }}
       >
         <Avatar size="lg" src={src}
-          sx={{ p: 0.5, border: '2px solid', background: 'black' }} />
+          sx={{ p: 0.5, background: 'black' }} />
           
       </Box>
     );

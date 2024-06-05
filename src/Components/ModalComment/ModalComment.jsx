@@ -1,53 +1,56 @@
 import * as React from 'react';
-import List from '@mui/joy/List';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
-import ModalDialog from '@mui/joy/ModalDialog';
-import ModalOverflow from '@mui/joy/ModalOverflow';
-import '../ModalComment/ModalComment.css'
 import Comments from '../Comments/Comments';
+import Sheet from '@mui/joy/Sheet';
+import { List } from '@mui/joy';
 
-export default function ModalDialogOverflow({activeModal}) {
-  const [layout, setLayout] = React.useState('center');
-  const [scroll, setScroll] = React.useState(true);
-
-  return (
-    <React.Fragment>
-      
-      <Modal
-        open={!!layout}
-       sx={{ opacity: "100%"}}
-        onClose={() => {
-          setLayout(undefined);
-        }}
-        
-      >
-        <ModalOverflow sx={{ background: "black", border: "none" }}>
-          <ModalDialog aria-labelledby="modal-dialog-overflow" layout={layout} sx={{
-            background: "#000",
-            border: "none"
-          }}>
-            <ModalClose />
-
-            {scroll && (
-              <List sx={{
-                height: "85vh",
-                minWidth: 1000,
-                display: "flex",
-                flexDirection: "row-reverse",
-                background: "black",
-               
-              }}>
-                <div className='Comments-modals'>
-                    <Comments></Comments>
-                </div>
-                <img src="https://i.pinimg.com/originals/f1/78/03/f1780333f2bea131ebd60c4862a7e781.jpg"
-                  width={"45%"} alt="" />
-              </List>
-            )}
-          </ModalDialog>
-        </ModalOverflow>
-      </Modal>
-    </React.Fragment>
-  );
+export default function ModalComments({ imgPublication, open, onClose, comments }) {
+    const [scroll, setScroll] = React.useState(true);
+    
+    return (
+        <React.Fragment>
+            <Modal
+                aria-labelledby="modal-title"
+                aria-describedby="modal-desc"
+                open={open}
+                onClose={onClose}
+                sx={{
+                     display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignItems: 'center'
+                }}
+            >
+                <Sheet
+                    variant="outlined"
+                    sx={{
+                        background: "black",
+                        border: "solid black",
+                        borderRadius: 'md',
+                        p: 3,
+                        boxShadow: 'lg',
+                        paddingRight: "200px"
+                    }}
+                >
+                    <ModalClose variant="plain" sx={{ m: 1, '&:hover': {
+                        backgroundColor: 'initial', color: "white"} }} />
+                    {scroll && (
+                        <List sx={{
+                            height: "85vh",
+                            display: "flex",
+                            flexDirection: "row-reverse",
+                        }}>
+                            <div className='Comments-modals'>
+                                <Comments comments={comments} />
+                            </div>
+                            <img src={imgPublication}
+                                width={"45%"} alt="" 
+                                style={{ border: "solid black", objectFit: "cover"}} />
+                        </List>
+                    )}
+                </Sheet>
+            </Modal>
+        </React.Fragment>
+    );
 }

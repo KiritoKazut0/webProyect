@@ -13,9 +13,10 @@ import Link from '@mui/joy/Link';
 import IconButton from '@mui/joy/IconButton';
 import CardContent from '@mui/joy/CardContent';
 
-export default function Comments({ username, avatar, content }) {
+export default function Comments({ username, avatar, content, comments }) {
+
   return (
-    <Box sx={{ width: 320, marginLeft: "30px" }}>
+    <Box sx={{ width: 320, marginLeft: "30px"}}>
       <Typography
         id="ellipsis-list-demo"
         level="body-xs"
@@ -34,12 +35,13 @@ export default function Comments({ username, avatar, content }) {
       >
         <Box sx={{ minWidth: 500, height: 550 }}  >
           <Box sx={{ height: 480 }} >
+
             {
               CommentsPublication.map((user, index) => {
                 return (
                   <ListItem key={index} sx={{ marginTop: "12px" }} >
                     <ListItemDecorator >
-                      <Avatar src={user.avatar} />
+                      <Avatar src={""} />
                     </ListItemDecorator>
                     <ListItemContent>
                       <Typography level="title-sm" sx={{ color: "#b7b6b6" }}>{user.username}</Typography>
@@ -51,6 +53,7 @@ export default function Comments({ username, avatar, content }) {
                 );
               })
             }
+
           </Box>
 
 

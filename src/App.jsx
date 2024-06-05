@@ -1,12 +1,17 @@
-import Home from "./pages/home";
-import ModalDialogOverflow from "./Components/ModalComment/ModalComment";
-function App() {
+ import Home from "./pages/Home/home"
+ import Login from "./pages/Form/Login"
+ import { BrowserRouter } from "react-router-dom";
 
-  return (
-    <div>
-      <Home/>
-    </div>
-  )
-}
 
-export default App
+ function App() {
+
+   return (
+     <div >
+       <Login/>
+     </div>
+   )
+ }
+
+ export default App;
+
+

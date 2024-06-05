@@ -8,7 +8,7 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Typography from '@mui/joy/Typography';
 import UsersFriends from '../../Utils/Friends';
 
-export default function Friends() {
+export default function Friends({imgPublication, comments}) {
   return (
     <Box sx={{ width: 400 }} >
       <br />

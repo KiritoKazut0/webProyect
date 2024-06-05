@@ -26,6 +26,10 @@ const ImagesUtils = [
     {
       id: 7,
       url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSHLkS0zBCPcdXjBU1M9iHV9zIGxqgmHvQWomXtE49NmpFemMDIPkoJiMYtSt2KJQhYAY&usqp=CAU"
+    },
+    {
+      id: 8,
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSHLkS0zBCPcdXjBU1M9iHV9zIGxqgmHvQWomXtE49NmpFemMDIPkoJiMYtSt2KJQhYAY&usqp=CAU"
     }
   ];
 

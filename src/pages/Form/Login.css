@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'Billabong';
+    src: url('../../fonts/Billabong.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+div.container-form{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+}
+
+
+form.login-form{
+    width: 20%;
+    height: 57%;
+    padding: 60px 2% ;
+    border: 1px solid #d4d4d4;
+    
+}
+
+img.img-form{
+    width: 25%;
+    height: 80%;
+}
+
+span.title-form{
+    font-size: 32px;
+    font-family: 'Billabong', sans-serif;
+    text-align: center;
+}
+
+span.aditional{
+    text-align: center;
+    font-size: 13px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    padding-bottom: 10px;
+}
+
+span.fb{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    gap: 5px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: rgba(20, 20, 155, 0.944);
+    font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+    form.login-form {
+        width: 55%;
+        padding: 30px 5%;
+    }
+
+    img.img-form {
+        
+        display: none;
+    }
+}
+
+
