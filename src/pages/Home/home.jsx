@@ -5,10 +5,10 @@ import Histories from '../../Components/Histories/Histories';
 import ImagesUtils from '../../Utils/Hisories';
 import { getPublications } from '../../Services/getPublications';
 import Nav from '../../Components/Nav/Nav';
-import { useWebSocket } from '../../hooks/useWebsocked';
 import '../Home/Home.css'
 
 export default function Home() {
+  
   const [data, setData] = useState([]);
   const interval = 5000;
 
@@ -30,49 +30,8 @@ export default function Home() {
 
   // websocked
 
-  const { isConnected, sendMessage } = useWebSocket('ws://localhost:3000/');
-  const [comments, setComments] = useState([]);
-
-  const handleNewComment = useCallback((data) => {
-    setComments((prevComments) => [...prevComments, data.data]);
-  }, []);
-
-  const handleGetComments = useCallback((data) => {
-    setComments(data.data);
-  }, []);
-
-  const memoizedComments = useMemo(() => comments, [comments]);
-
-  // Enviar un nuevo comentario
-  const handleSendComment = useCallback(() => {
-    const publicationId = '6660c69d06c7229388cc3396';
-    const comment = 'Nuevo comentario';
-    const userId = 'tu-id-de-usuario';
-
-    const message = {
-      publicationId,
-      comment,
-      userId,
-      accion: 'postMessage',
-    };
-
-    sendMessage(message);
-  }, [sendMessage]);
-
-  // Obtener comentarios de una publicación
-  const handleGetCommentsClick = useCallback(() => {
-    const publicationId = '6660c69d06c7229388cc3396';
-
-    const message = {
-      publicationId,
-      accion: 'getcomments',
-    };
-
-    sendMessage(message);
-  }, [sendMessage]);
-
-
-
+  
+  
 
 
   return (

@@ -17,6 +17,7 @@ import ModalComments from '../ModalComment/ModalComment';
 
 export default function InstagramPost({ username, imgPublication, content, imgPerfil }) {
 
+    console.log(imgPublication);
     const [activeModalComments, setActiveModalComments] = React.useState(false);
 
     const handlerShowComments = () => { setActiveModalComments(true) };
