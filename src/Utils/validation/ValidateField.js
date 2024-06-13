@@ -33,3 +33,11 @@ export const email = (correo) => {
         return null;
     }
 };
+
+export const sendText = (text) => {
+    if (text === ''){
+        return "el campo no puede estar vacio"
+    } else{
+        return null
+    }
+}

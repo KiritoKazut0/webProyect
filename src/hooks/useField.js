@@ -8,16 +8,19 @@ import * as ValidateField from "../Utils/validation/ValidateField"
     const onblur = event => {
         setValue(event.target.value)
         setMessageError(ValidateField[type](event.target.value)); 
-        console.log(value);
     }
 
+    const onchange = event => {
+        setValue(event.target.value);
+    }
 
 
     return {
         type,
         value,
         messageError,
-        onblur
+        onblur,
+        onchange
     }
 }
 

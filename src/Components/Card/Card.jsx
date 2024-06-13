@@ -15,15 +15,13 @@ import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded
 import ModalComments from '../ModalComment/ModalComment';
 
 
-export default function InstagramPost({ username, imgPublication, content, imgPerfil }) {
+export default function InstagramPost({ username, imgPublication, content, imgPerfil, publicationId }) {
 
-    console.log(imgPublication);
     const [activeModalComments, setActiveModalComments] = React.useState(false);
-
     const handlerShowComments = () => { setActiveModalComments(true) };
-  
     const handleClose = () => { setActiveModalComments(false) };
   
+
 
   return (
     <Card variant="outlined" sx={{
@@ -94,7 +92,7 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
               imgPublication={imgPublication}
               open={activeModalComments}
               onClose={handleClose}
-
+              publicationId={publicationId}
             />
           )}
 

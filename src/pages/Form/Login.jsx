@@ -18,6 +18,7 @@ export default function Login() {
   const password = useField({ type: "password" });
   const email = useField({ type: "email" });
   const navigate =  useNavigate();
+  
   const handlerLogin = async () => {
     try {
 
@@ -29,7 +30,7 @@ export default function Login() {
 
       const userData = await LoginUser(credencials);
      
-      console.log(userData.user._id);
+      console.log(userData);
 
       if (userData) { 
         setErrorLoged(false);

@@ -8,13 +8,22 @@ import IconMessage from '../icons/IconsMessage';
 import IconNotification from '../icons/IconsNotifications';
 import IconReals from '../icons/IconsReals';
 import CreatePublication from '../CreatePublication/CreatePublication';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from 'react-router-dom';
 
 export default function Nav() {
     const [activeForm, setActiveForm] = useState(false);
-
+    const navigate = useNavigate();
     const handleractiveForm = () => {
         setActiveForm(true);
     };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+
+        navigate('/');
+    }
 
     const handleCloseForm = () => {
         setActiveForm(false);
@@ -34,12 +43,15 @@ export default function Nav() {
                     <button className='icons' onClick={handleractiveForm}>
                         <li className='icon-add'><IconCreate /> Crear</li>
                     </button>
+                    <button className='icons' onClick={logout}>
+                        <li className='icon-add'><LogoutOutlinedIcon />Salir</li>
+                    </button>
                 </ul>
             </nav>
             {activeForm && (
-                <CreatePublication 
-                    active={activeForm} 
-                    close={handleCloseForm} 
+                <CreatePublication
+                    active={activeForm}
+                    close={handleCloseForm}
                 />
             )}
         </>

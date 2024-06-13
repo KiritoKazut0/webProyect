@@ -6,9 +6,10 @@ import ImagesUtils from '../../Utils/Hisories';
 import { getPublications } from '../../Services/getPublications';
 import Nav from '../../Components/Nav/Nav';
 import '../Home/Home.css'
+import {WebSocketProvider} from "../../contexts/SocketContext.jsx"
 
 export default function Home() {
-  
+
   const [data, setData] = useState([]);
   const interval = 5000;
 
@@ -28,14 +29,12 @@ export default function Home() {
     return () => clearInterval(intervalGet);
   }, [interval]);
 
-  // websocked
 
   
-  
-
 
   return (
-    <div className='Container-Home'>
+    <WebSocketProvider>
+      <div className='Container-Home'>
       <div className='nav'>
         <Nav />
       </div>
@@ -52,11 +51,12 @@ export default function Home() {
           content={postInstagram.content}
           username={postInstagram.user.username}
           imgPerfil={postInstagram.user.imgPerfil}
-          
+          publicationId={postInstagram._id}
         />
         ))}
       </div>
       <Friends />
     </div>
+    </WebSocketProvider>
   );
 }
