@@ -22,7 +22,7 @@ export default function Comments({ comments, publicationId }) {
   const renderComponents = React.useMemo(() => {
     return comments?.map((user, index) => (
 
-      <ListItem key={user._id} sx={{ marginTop: "12px" }}>
+      <ListItem key={index} sx={{ marginTop: "12px" }}>
         <ListItemDecorator>
           <Avatar src={user.user.imgPerfil} />
         </ListItemDecorator>

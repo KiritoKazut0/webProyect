@@ -29,8 +29,6 @@ export default function Login() {
       }
 
       const userData = await LoginUser(credencials);
-     
-      console.log(userData);
 
       if (userData) { 
         setErrorLoged(false);

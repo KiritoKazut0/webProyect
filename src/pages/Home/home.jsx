@@ -7,10 +7,12 @@ import { getPublications } from '../../Services/getPublications';
 import Nav from '../../Components/Nav/Nav';
 import '../Home/Home.css'
 import {WebSocketProvider} from "../../contexts/SocketContext.jsx"
+import { usePolling } from '../../hooks/usePolling.js';
 
 export default function Home() {
 
   const [data, setData] = useState([]);
+  const [Reaction, setReaction] = useState(null);
   const interval = 5000;
 
   //short polling
@@ -29,8 +31,15 @@ export default function Home() {
     return () => clearInterval(intervalGet);
   }, [interval]);
 
+  // longPolling
+  const { reactions } = usePolling(localStorage.getItem('userId'));
+  const memoizedReactions = useMemo(() => reactions, [reactions]);
 
-  
+  useEffect(() => {
+    setReaction(memoizedReactions);
+    console.log(memoizedReactions);
+  }, [memoizedReactions]);
+
 
   return (
     <WebSocketProvider>
@@ -52,6 +61,7 @@ export default function Home() {
           username={postInstagram.user.username}
           imgPerfil={postInstagram.user.imgPerfil}
           publicationId={postInstagram._id}
+          reactions={memoizedReactions}
         />
         ))}
       </div>

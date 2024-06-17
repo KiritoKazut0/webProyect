@@ -22,10 +22,10 @@ export const WebSocketProvider = ({ children }) => {
           setComments((prevComments) => {
             const { publicationId, comments } = data.data;
         
-            // Verificar si ya existen comentarios para esa publicación
+           
             const existingComments = prevComments[publicationId] || [];
         
-            // Filtrar los nuevos comentarios para evitar duplicados
+            
             const newComments = comments.filter(newComment => (
               !existingComments.some(existingComment => (
                 existingComment.content === newComment.content &&
@@ -33,7 +33,7 @@ export const WebSocketProvider = ({ children }) => {
               ))
             ));
         
-            // Actualizar los comentarios solo si hay nuevos comentarios
+        
             if (newComments.length > 0) {
               return {
                 ...prevComments,
@@ -43,7 +43,7 @@ export const WebSocketProvider = ({ children }) => {
                 ],
               };
             } else {
-              return prevComments; // Devolver el estado anterior sin cambios si no hay nuevos comentarios
+              return prevComments;
             }
           });
           break;

@@ -13,14 +13,24 @@ import ModeCommentOutlined from '@mui/icons-material/ModeCommentOutlined';
 import SendOutlined from '@mui/icons-material/SendOutlined';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import ModalComments from '../ModalComment/ModalComment';
+import { addReactions } from '../../Services/getReaccions';
 
+export default function InstagramPost({ username, imgPublication, content, imgPerfil, publicationId, reactions }) {
 
-export default function InstagramPost({ username, imgPublication, content, imgPerfil, publicationId }) {
+  const [userId, setUserId] = React.useState(localStorage.getItem('userId'));
+  const [activeModalComments, setActiveModalComments] = React.useState(false);
 
-    const [activeModalComments, setActiveModalComments] = React.useState(false);
-    const handlerShowComments = () => { setActiveModalComments(true) };
-    const handleClose = () => { setActiveModalComments(false) };
-  
+  const handlerShowComments = () => { setActiveModalComments(true); };
+  const handleClose = () => { setActiveModalComments(false); };
+
+  const addnewReaction = async () => {
+    try {
+      await addReactions(userId, publicationId);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
 
   return (
@@ -44,12 +54,10 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
               background:
                 'linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 85%,#bc1888 100%)',
             },
-
           }}
         >
           <Avatar size="sm" src={imgPerfil}
             sx={{ p: 0.5, background: "black" }} />
-
         </Box>
         <Typography fontWeight="lg" sx={{ color: "white" }}>{username}</Typography>
         <IconButton variant="plain" color="neutral" size="sm" sx={{
@@ -60,23 +68,41 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
           <MoreHoriz sx={{ color: "white" }} />
         </IconButton>
       </CardContent >
-
-
       <AspectRatio minHeight={590} >
         <img src={imgPublication}
           style={{ objectFit: "cover", background: "black", border: " 1px solid #7e7e7e" }} loading="lazy" />
       </AspectRatio>
-
-
       <CardContent orientation="horizontal" sx={{ alignItems: 'center', mx: -1 }}>
         <Box sx={{ width: 0, display: 'flex', gap: 0.5 }}>
-          <IconButton variant="plain" color="neutral" size="sm" sx={{
-            '&:hover': {
-              backgroundColor: 'initial',
-            },
-          }}>
-            <FavoriteBorder sx={{ color: "white" }} />
-          </IconButton>
+
+          {reactions[publicationId] && reactions[publicationId].hasReacted ? (
+            <IconButton
+              variant="plain"
+              color="neutral"
+              size="sm"
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'initial',
+                },
+              }}
+            >
+              <FavoriteBorder sx={{ color: 'red' }} />
+            </IconButton>
+          ) : (
+            <IconButton
+              variant="plain"
+              color="neutral"
+              size="sm"
+              onClick={addnewReaction}
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'initial',
+                },
+              }}
+            >
+              <FavoriteBorder sx={{ color: 'white' }} />
+            </IconButton>
+          )}
           <IconButton variant="plain" color="neutral" size="sm"
             onClick={handlerShowComments} sx={{
               '&:hover': {
@@ -85,8 +111,6 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
             }} >
             <ModeCommentOutlined sx={{ color: "white" }} />
           </IconButton>
-
-            {/* aqui se debe de pasar los comentarios en modalComments */}
           {activeModalComments && (
             <ModalComments
               imgPublication={imgPublication}
@@ -95,8 +119,6 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
               publicationId={publicationId}
             />
           )}
-
-
           <IconButton variant="plain" color="neutral" size="sm" sx={{
             '&:hover': {
               backgroundColor: 'initial',
@@ -137,10 +159,12 @@ export default function InstagramPost({ username, imgPublication, content, imgPe
           textColor="text.primary"
           sx={{ color: "white" }}
         >
-          8.1M Likes
+          {reactions[publicationId] ?
+            `${reactions[publicationId].reactionCount}`
+            :
+            '0'} Likes
         </Link>
         <Typography fontSize="sm" sx={{ color: "white" }}>
-
           {content}
         </Typography>
         <Link

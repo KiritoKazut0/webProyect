@@ -1,17 +1,25 @@
 import axios from "axios";
 
+export const addPublications = (data) => {
+    const token = localStorage.getItem('token');
 
-export const addPublications = (data) =>{
-    return axios.post('http://localhost:3000/publication/', data)
+    return axios.post(
+     
+        'http://localhost:3000/publication/', 
+        data, 
+        {
+            headers: {
+                'token': token
+            }
+        }
+    )
     .then((response) => {
-        return response.data
+        return response.data;
     })
-
     .catch((error) => {
-        console.error('Error al agregar una publicaciones', error);
-        throw error.response
-    })
+        console.error('Error al agregar una publicación', error);
+        throw error.response;
+    });
 }
-
 
 

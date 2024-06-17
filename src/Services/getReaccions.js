@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-export const getInitialReactions = async (idPublication) => {
-    console.log(idPublication);
+export const getInitialReactions = async (userId) => {
     try {
-        const response = await axios.get(`http://localhost:3000/publication/reaction-initial/${idPublication}`);
-        
+        const token = localStorage.getItem('token');
+        const response = await axios.post(`http://localhost:3000/publication/reaction-initial`, {id: userId},  {
+            headers: {
+                'token': token
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching initial reactions count:', error);
@@ -14,12 +17,17 @@ export const getInitialReactions = async (idPublication) => {
 
 export const getNewReactions = async (userId, idPublication) => {
     try {
+        const token = localStorage.getItem('token');
         const data = {
             userId,
             idPublication,
             reaction: "love"
         };
-        const response = await axios.post(`http://localhost:3000/publication/reaction`, data);
+        const response = await axios.get(`http://localhost:3000/publication/reaction`, data,  {
+            headers: {
+                'token': token
+            }
+        });
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -31,13 +39,18 @@ export const getNewReactions = async (userId, idPublication) => {
 
 export const addReactions = async (userId, idPublication) => {
     try {
+        const token = localStorage.getItem('token');
         const data = {
             userId,
             idPublication,
             reaction: "love"
         };
-        const response = await axios.post(`http://localhost:3000/publication/reaction/add`, data);
-        console.log(response.data);
+        const response = await axios.post(`http://localhost:3000/publication/reaction/add`, data, {
+            headers: {
+                'token': token
+            }
+        } );
+        
         return response.data;
     } catch (error) {
         console.error('Error the add reaction', error);
